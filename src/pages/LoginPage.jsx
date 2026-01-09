@@ -5,10 +5,9 @@ import { LogIn, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { Googleicon } from "../assets/images.jsx";
 
-
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login ,googleLogin } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -184,14 +183,17 @@ export default function LoginPage() {
                 </>
               )}
             </button>
-            <a href="">
-              <button
-                className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-white text-black rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <Googleicon />
-                <span>Sign up With Google</span>
-              </button>
-            </a>
+            <button
+              type="button"
+              onClick={async () => {
+                await googleLogin();
+                navigate("/");
+              }}
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-white text-black rounded-lg border hover:bg-gray-100"
+            >
+              <Googleicon />
+              <span>Sign up with Google</span>
+            </button>
           </form>
 
           <div className="mt-6 text-center">
